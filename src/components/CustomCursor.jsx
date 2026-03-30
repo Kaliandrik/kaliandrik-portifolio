@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-  // Configuração de mola para um movimento suave (efeito "smooth")
+  const [isMobile, setIsMobile] = useState(false);
+  
   const mouseX = useSpring(0, { stiffness: 500, damping: 28 });
   const mouseY = useSpring(0, { stiffness: 500, damping: 28 });
 
   useEffect(() => {
+    // 1. Check se é mobile (Touch screen)
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768);
+    };
+
+    checkMobile(); // Executa ao montar
+
     const handleMouseMove = (e) => {
-      // Ajuste de -10 para centralizar a bolinha de 20px no bico do mouse
       mouseX.set(e.clientX - 10);
       mouseY.set(e.clientY - 10);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isMobile]);
+
+  // Se for mobile, não renderiza nada (retorna null)
+  if (isMobile) return null;
 
   return (
     <motion.div
@@ -31,16 +43,15 @@ const CustomCursor = () => {
         left: 0,
         width: '20px',
         height: '20px',
-        backgroundColor: '#7c3aed', // Cor primária (roxo)
+        backgroundColor: '#7c3aed', 
         borderRadius: '50%',
-        pointerEvents: 'none', // Importante: permite clicar nos botões "através" do cursor
+        pointerEvents: 'none', 
         zIndex: 9999,
-        mixBlendMode: 'difference', // Efeito visual que inverte as cores ao passar por textos
+        mixBlendMode: 'difference', 
         boxShadow: '0 0 15px rgba(124, 58, 237, 0.5)'
       }}
     />
   );
 };
 
-// ESTA LINHA É OBRIGATÓRIA PARA O App.jsx FUNCIONAR
 export default CustomCursor;

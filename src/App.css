@@ -622,44 +622,57 @@ body.menu-open {
   }
 }
 
-/* --- GRID DA SEÇÃO SOBRE MIM --- */
+/* --- SEÇÃO SOBRE MIM (PREMIUM) --- */
 .about-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 5rem;
+  gap: 4rem;
   align-items: center;
 }
 
-.text-highlight {
-  display: flex;
+/* Badge de Destaque */
+.text-highlight-badge {
+  display: inline-flex;
   align-items: center;
   gap: 10px;
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  padding: 8px 18px;
+  border-radius: 100px;
   color: var(--primary);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 0.85rem;
-  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
-.icon-tiny {
-  width: 16px;
-  height: 16px;
+.icon-sparkle {
+  color: var(--primary);
+}
+
+.about-subtitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
 }
 
 .description-p {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.8;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   color: #e4e4e7;
 }
 
 .description-p.dim {
   color: var(--text-dim);
-  font-size: 1.05rem;
+  font-size: 1rem;
+  opacity: 0.7;
 }
 
-/* CARDS PREMIUM */
+/* CARDS DE INFORMAÇÃO */
 .about-cards-container {
   display: flex;
   flex-direction: column;
@@ -667,18 +680,20 @@ body.menu-open {
 }
 
 .info-card-premium {
-  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 1.8rem;
   border-radius: 24px;
   display: flex;
   gap: 20px;
   align-items: center;
-  transition: var(--transition);
-  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
 }
 
+/* Linha de destaque lateral no Hover */
 .info-card-premium::before {
   content: '';
   position: absolute;
@@ -688,7 +703,7 @@ body.menu-open {
   height: 100%;
   background: var(--primary);
   opacity: 0;
-  transition: var(--transition);
+  transition: 0.3s ease;
 }
 
 .info-card-premium:hover::before {
@@ -696,61 +711,49 @@ body.menu-open {
 }
 
 .info-card-premium:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(124, 58, 237, 0.03);
   border-color: rgba(124, 58, 237, 0.3);
-  transform: translateX(10px);
+  transform: translateX(10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .card-icon-bg {
   background: rgba(124, 58, 237, 0.1);
-  padding: 15px;
+  width: 55px;
+  height: 55px;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .info-card-premium h4 {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   margin-bottom: 4px;
-  color: #fff;
+  color: var(--primary);
 }
 
 .info-card-premium p {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 2px;
 }
 
 .info-card-premium small {
   color: var(--text-dim);
   display: block;
-  margin-top: 5px;
   font-size: 0.85rem;
   line-height: 1.4;
-}
-
-/* RESPONSIVIDADE SOBRE MIM */
-@media (max-width: 992px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
-  }
-  
-  .text-highlight {
-    justify-content: center;
-  }
-
-  .info-card-premium {
-    text-align: left;
-  }
 }
 
 /* --- SEÇÃO DE CONTATO --- */
 .contact-main-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Dividido ao meio no PC */
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
 }
@@ -759,12 +762,13 @@ body.menu-open {
   font-size: 3rem;
   margin-bottom: 1.5rem;
   line-height: 1.2;
+  font-weight: 800;
 }
 
 .contact-methods {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
   margin-top: 2rem;
 }
 
@@ -772,26 +776,66 @@ body.menu-open {
   display: flex;
   align-items: center;
   gap: 15px;
-  color: var(--text-main);
+  color: #fff;
   text-decoration: none;
-  font-size: 1.1rem;
-  padding: 1rem;
-  background: var(--bg-card);
-  border-radius: 12px;
+  font-size: 1rem;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
 .method:hover {
   border-color: var(--primary);
-  background: rgba(124, 58, 237, 0.05);
+  background: rgba(124, 58, 237, 0.08);
   transform: translateX(10px);
+  color: var(--primary);
 }
 
 .method svg {
   color: var(--primary);
+  transition: transform 0.3s ease;
 }
 
+.method:hover svg {
+  transform: scale(1.2);
+}
+
+/* --- RESPONSIVIDADE GERAL --- */
+@media (max-width: 992px) {
+  .about-grid, .contact-main-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .text-highlight-badge, .status-item {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-subtitle, .contact-info-text h2 {
+    font-size: 2.2rem;
+  }
+
+  .info-card-premium, .method {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-subtitle, .contact-info-text h2 {
+    font-size: 1.8rem;
+  }
+  
+  .info-card-premium {
+    padding: 1.2rem;
+    flex-direction: column;
+    text-align: center;
+  }
+}
 /* --- FORMULÁRIO SIMPLES (ESTILO) --- */
 .contact-simple-form {
   background: var(--bg-card);
@@ -975,41 +1019,89 @@ body.menu-open {
 }
 
 /* --- EFEITO MÁQUINA DE ESCREVER --- */
+/* --- TYPEWRITER & HERO TITLE --- */
 
+/* O Título Principal */
+.home-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+/* O Container que "segura" o espaço do nome para não pular o site */
+.typewriter-container {
+  display: inline-flex;
+  min-width: 250px; 
+  min-height: 1.2em;
+  align-items: center;
+  vertical-align: bottom;
+  overflow: visible;
+}
+
+/* O texto que efetivamente digita */
 .typewriter-text {
-  display: inline-block;
   color: var(--primary);
-  position: relative;
-  white-space: nowrap; /* Garante que o nome não quebre linha durante a animação */
-  overflow: hidden; /* Esconde as letras que ainda não "surgiram" */
-  border-right: 3px solid var(--primary); /* O cursor piscando */
-  
-  /* Animação: 
-     - typing: faz a largura ir de 0 a 100%
-     - blink: faz o cursor piscar
-  */
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--primary);
+  width: 0;
   animation: 
-    typing 3.5s steps(30, end) infinite,
+    typing 3.5s steps(20, end) infinite,
     blink-caret 0.75s step-end infinite;
 }
 
-/* Animação de Digitar */
+/* --- ANIMAÇÕES --- */
+
 @keyframes typing {
-  0% { width: 0 }
-  50% { width: 100% } /* Fica totalmente escrito no meio do tempo */
-  90% { width: 100% } /* Pausa ele escrito por um tempo antes de sumir */
-  100% { width: 0 }    /* Reinicia o ciclo */
+  0% { width: 0; }
+  50% { width: 100%; }   /* Termina de digitar no meio do ciclo */
+  90% { width: 100%; }   /* Fica parado lendo o nome */
+  100% { width: 0; }     /* Reseta rápido */
 }
 
-/* Animação do Cursor Piscando */
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--primary) }
+  from, to { border-color: transparent; }
+  50% { border-color: var(--primary); }
 }
 
-/* Ajuste para Mobile: diminui o tamanho do cursor se necessário */
+/* --- AJUSTES PARA MOBILE (CENTRALIZAÇÃO) --- */
+
 @media (max-width: 768px) {
+  .home-title {
+    flex-direction: column; /* Nome em cima, sobrenome embaixo */
+    align-items: center;    /* Centraliza os blocos de texto */
+    text-align: center;
+    font-size: 2.8rem;
+    gap: 5px;               /* Diminui o espaço entre nome e sobrenome */
+  }
+
+  .typewriter-container {
+    min-width: 100%;        /* Ocupa a largura toda para alinhar ao centro */
+    justify-content: center;/* Centraliza o texto digitando */
+    margin-top: 5px;
+  }
+
   .typewriter-text {
-    border-right-width: 2px;
+    border-right-width: 2px; /* Cursor um pouco mais fino no celular */
+  }
+
+  /* Centraliza também o subtítulo e o botão no mobile */
+  .hero-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .home-subtitle {
+    margin: 1rem auto 2rem auto;
   }
 }

@@ -37,8 +37,12 @@ const Header = () => {
           <span className="tag" style={{ marginBottom: '1rem', display: 'inline-block' }}>
             🚀 Disponível para Estágio
           </span>
-          <h1 className="home-title">
-  Kaliandrik <span className="typewriter-text">Azevedo</span>
+<h1 className="home-title">
+  <span>Kaliandrik</span> 
+  {/* Envolvemos o nome no container fantasma */}
+  <div className="typewriter-container">
+    <span className="typewriter-text">Azevedo</span>
+  </div>
 </h1>
           <p className="home-subtitle">
             Desenvolvedor Full Stack em formação. Apaixonado por transformar lógica em interfaces incríveis.
