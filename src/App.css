@@ -481,153 +481,206 @@ body.menu-open {
 }
 
 /* --- SEÇÃO SKILLS (VERSÃO PREMIUM) --- */
-.skills-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Um do lado do outro no PC */
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.skill-category-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 2.5rem;
-  backdrop-filter: blur(10px);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* --- SEÇÃO SKILLS (VERSÃO PREMIUM / TECH GLOW) --- */
+.section-skills {
+  padding: 100px 0;
   position: relative;
   overflow: hidden;
 }
 
-.skill-category-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--primary);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.category-header {
+.section-header-skills {
+  margin-bottom: 4rem;
   display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 2rem;
-}
-
-.icon-wrapper {
-  background: rgba(124, 58, 237, 0.1);
-  padding: 12px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-/* Cores específicas para os ícones */
-.icon-purple { color: #a78bfa; }
-.icon-blue { color: #60a5fa; }
-
-.category-header h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.5px;
+.skills-grid-improved {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Um do lado do outro no PC */
+  gap: 3rem;
+  width: 100%;
 }
 
-.skills-list {
+/* --- CARDS PREMIUM (GLASSMORPHISM + GLOW) --- */
+.skill-category-card-premium {
+  position: relative;
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 28px;
+  padding: 3rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Efeito de Vidro por cima */
+.card-glass-effect-skills {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.04) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Brilho Lateral no Hover */
+.glow-client:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 30px 60px rgba(124, 58, 237, 0.2);
+}
+
+.glow-server:hover {
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 30px 60px rgba(96, 165, 250, 0.2);
+}
+
+/* Cabeçalho do Card */
+.category-header-skills {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 5;
+}
+
+.icon-wrapper-main {
+  background: rgba(124, 58, 237, 0.1);
+  width: 65px;
+  height: 65px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+.icon-main {
+  width: 32px;
+  height: 32px;
+}
+
+/* Cores dos Ícones Principais */
+.icon-purple { color: var(--primary); }
+.icon-blue { color: #60a5fa; }
+
+.category-header-skills h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* --- LISTA DE SKILLS (A ANIMAÇÃO "FODA" AQUI) --- */
+.skills-list-improved {
   list-style: none;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1.2rem;
+  position: relative;
+  z-index: 5;
 }
 
-.skills-list li {
+.skill-item-premium {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #a1a1aa;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1rem 1.5rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
+}
+
+.skill-item-premium:hover {
+  background: rgba(124, 58, 237, 0.05);
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+/* Ícone de Status (A bolinha tech) */
+.skill-icon-status {
+  width: 35px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* Nome da Skill */
+.skill-name {
+  color: var(--text-dim);
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
-.skill-category-card:hover .skills-list li {
-  color: #e4e4e7; /* Texto brilha no hover */
+/* Ícone de Check Ativo (Escondido no Início) */
+.skill-check-active {
+  margin-left: auto; /* Joga para a direita */
+  color: var(--primary);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* O "Dot" roxo que substitui a seta antiga */
-.skill-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--primary);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--primary);
-  flex-shrink: 0;
+/* --- ESTADO ATIVO (QUANDO A ANIMAÇÃO APARECE) --- */
+
+/* Quando o card ou li entra na tela pelo motion, mudamos o estilo */
+/* O Motion controla o opacity e x, mas usamos CSS para o glow técnico */
+
+.skill-item-premium:hover .skill-icon-status {
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--primary);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  filter: drop-shadow(0 0 10px var(--primary-glow));
 }
 
-/* Título da seção de contato */
-.contact-title {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-  font-weight: 800;
+.skill-item-premium:hover .skill-name {
   color: #fff;
 }
 
-/* Efeito de Gradiente Animado */
-.anim-gradient {
-  background: linear-gradient(
-    to right, 
-    #7c3aed, 
-    #a78bfa, 
-    #7c3aed
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s linear infinite;
+.skill-item-premium:hover .skill-check-active {
+  opacity: 1;
+  transform: scale(1);
 }
 
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
+/* Brilho no ícone do título */
+.icon-purple-glow {
+  color: var(--primary);
+  filter: drop-shadow(0 0 8px var(--primary-glow));
 }
 
-/* Efeito sutil de "pulo" no hover do título */
-.contact-title:hover .anim-gradient {
-  filter: drop-shadow(0 0 15px var(--primary-glow));
-  transition: 0.3s;
-}
-
-/* Responsividade para o título */
-@media (max-width: 768px) {
-  .contact-title {
-    font-size: 2.2rem;
-  }
-}
-
-/* Ajuste Mobile para as Skills */
-@media (max-width: 768px) {
-  .skills-grid {
-    grid-template-columns: 1fr; /* Empilha no celular */
-    gap: 1.5rem;
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 992px) {
+  .skills-grid-improved {
+    grid-template-columns: 1fr; /* Empilha no Mobile */
+    gap: 2rem;
   }
   
-  .skill-category-card {
-    padding: 1.5rem;
-  }
-  
-  .category-header h3 {
-    font-size: 1.3rem;
+  .skill-category-card-premium {
+    padding: 2rem;
   }
 }
 
-/* --- SEÇÃO SOBRE MIM (PREMIUM) --- */
-.about-grid {
+/* --- SEÇÃO SOBRE MIM (ESTRUTURA EM GRID) --- */
+.section-about {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-grid-improved {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  /* Define duas colunas: 1.2 partes para o texto, 0.8 partes para o terminal */
+  grid-template-columns: 1.2fr 0.8fr; 
   gap: 4rem;
   align-items: center;
+  width: 100%;
 }
 
 /* Badge de Destaque */
@@ -639,16 +692,12 @@ body.menu-open {
   border: 1px solid rgba(124, 58, 237, 0.2);
   padding: 8px 18px;
   border-radius: 100px;
-  color: var(--primary);
+  color: #7c3aed; /* Cor primária roxa */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.75rem;
   margin-bottom: 1.5rem;
-}
-
-.icon-sparkle {
-  color: var(--primary);
 }
 
 .about-subtitle {
@@ -667,87 +716,153 @@ body.menu-open {
 }
 
 .description-p.dim {
-  color: var(--text-dim);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 1rem;
-  opacity: 0.7;
 }
 
-/* CARDS DE INFORMAÇÃO */
-.about-cards-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.info-card-premium {
+/* --- ESTILIZAÇÃO DO TERMINAL --- */
+.about-terminal-container {
   position: relative;
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 1.8rem;
-  border-radius: 24px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  overflow: hidden;
+  width: 100%;
+  max-width: 550px;
+  justify-self: center;
 }
 
-/* Linha de destaque lateral no Hover */
-.info-card-premium::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--primary);
-  opacity: 0;
-  transition: 0.3s ease;
-}
-
-.info-card-premium:hover::before {
-  opacity: 1;
-}
-
-.info-card-premium:hover {
-  background: rgba(124, 58, 237, 0.03);
-  border-color: rgba(124, 58, 237, 0.3);
-  transform: translateX(10px) scale(1.02);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.card-icon-bg {
-  background: rgba(124, 58, 237, 0.1);
-  width: 55px;
-  height: 55px;
+.terminal-window {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.terminal-window:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.terminal-header {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px 18px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  gap: 15px;
 }
 
-.info-card-premium h4 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 4px;
-  color: var(--primary);
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
 }
 
-.info-card-premium p {
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 2px;
+.terminal-buttons span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
 }
 
-.info-card-premium small {
-  color: var(--text-dim);
-  display: block;
+.btn-close { background: #ff5f57; }
+.btn-minimize { background: #febc2e; }
+.btn-maximize { background: #28c840; }
+
+.terminal-title {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+.terminal-body {
+  padding: 25px;
+  font-family: 'Fira Code', 'Courier New', monospace;
   font-size: 0.85rem;
-  line-height: 1.4;
+  line-height: 1.6;
+  color: #fff;
+}
+
+/* ANIMAÇÃO DE DIGITAÇÃO HACKER */
+.terminal-code-typing {
+  display: inline-block;
+  white-space: pre;
+  overflow: hidden;
+  vertical-align: top;
+  width: 0;
+  /* Faz a animação de "escrever" */
+  animation: typingTerminal 5s steps(120, end) infinite;
+}
+
+@keyframes typingTerminal {
+  0% { width: 0; }
+  50%, 90% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Cursor Piscando */
+.terminal-cursor-final {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: #7c3aed;
+  margin-left: 4px;
+  animation: blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  50% { opacity: 0; }
+}
+
+/* Cores de Sintaxe (Syntax Highlighting) */
+.syntax-bracket { color: #facc15; }
+.syntax-key { color: #a78bfa; }
+.syntax-string { color: #28c840; }
+
+/* Brilho Roxo atrás do Terminal */
+.terminal-glow-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 992px) {
+  .about-grid-improved {
+    /* No celular/tablet vira uma coluna só (um embaixo do outro) */
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text-highlight-badge {
+    justify-content: center;
+  }
+
+  .about-subtitle {
+    font-size: 2rem;
+  }
+
+  .terminal-body {
+    font-size: 0.75rem;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-code-typing {
+    font-size: 0.7rem; /* Garante que o código não quebre linha no celular */
+  }
 }
 
 /* --- SEÇÃO DE CONTATO --- */
