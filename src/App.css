@@ -523,164 +523,82 @@ body.menu-open {
   }
 }
 
-/* --- SEÇÃO SKILLS (VERSÃO PREMIUM) --- */
-/* --- SEÇÃO SKILLS (VERSÃO PREMIUM / TECH GLOW) --- */
+/* --- SEÇÃO SKILLS (OTIMIZADA) --- */
 .section-skills {
   padding: 100px 0;
   position: relative;
   overflow: hidden;
-}
-
-.section-header-skills {
-  margin-bottom: 4rem;
-  display: flex;
-  justify-content: center;
+  /* Garante que o navegador trate a seção como uma camada separada */
+  contain: content; 
 }
 
 .skills-grid-improved {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Um do lado do outro no PC */
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   width: 100%;
 }
 
-/* --- CARDS PREMIUM (GLASSMORPHISM + GLOW) --- */
+/* --- CARDS PREMIUM --- */
 .skill-category-card-premium {
   position: relative;
-  background: rgba(255, 255, 255, 0.01);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.02);
+  /* Blur suave apenas no PC por performance */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 28px;
   padding: 3rem;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  /* Transições específicas para GPU */
+  transition: transform 0.3s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  will-change: transform;
 }
 
-/* Efeito de Vidro por cima */
-.card-glass-effect-skills {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.04) 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 1;
+/* Desativa blur pesado no mobile para ficar liso */
+@media (max-width: 768px) {
+  .skill-category-card-premium {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(15, 15, 15, 0.95); /* Fundo sólido e escuro */
+  }
 }
 
-/* Brilho Lateral no Hover */
-.glow-client:hover {
-  border-color: rgba(124, 58, 237, 0.3);
-  box-shadow: 0 30px 60px rgba(124, 58, 237, 0.2);
-}
-
-.glow-server:hover {
-  border-color: rgba(96, 165, 250, 0.3);
-  box-shadow: 0 30px 60px rgba(96, 165, 250, 0.2);
-}
-
-/* Cabeçalho do Card */
-.category-header-skills {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 2.5rem;
-  position: relative;
-  z-index: 5;
-}
-
-.icon-wrapper-main {
-  background: rgba(124, 58, 237, 0.1);
-  width: 65px;
-  height: 65px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(124, 58, 237, 0.15);
-}
-
-.icon-main {
-  width: 32px;
-  height: 32px;
-}
-
-/* Cores dos Ícones Principais */
-.icon-purple { color: var(--primary); }
-.icon-blue { color: #60a5fa; }
-
-.category-header-skills h3 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* --- LISTA DE SKILLS (A ANIMAÇÃO "FODA" AQUI) --- */
-.skills-list-improved {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  position: relative;
-  z-index: 5;
-}
-
+/* --- LISTA DE SKILLS --- */
 .skill-item-premium {
   display: flex;
   align-items: center;
   gap: 15px;
   background: rgba(255, 255, 255, 0.02);
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.2rem; /* Reduzi um pouco para ficar mais elegante */
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background 0.3s ease;
-}
-
-.skill-item-premium:hover {
-  background: rgba(124, 58, 237, 0.05);
-  border-color: rgba(124, 58, 237, 0.2);
-}
-
-/* Ícone de Status (A bolinha tech) */
-.skill-icon-status {
-  width: 35px;
-  height: 35px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.3);
-  flex-shrink: 0;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  /* Transição de cor é leve */
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 /* Nome da Skill */
 .skill-name {
   color: var(--text-dim);
-  font-size: 1rem;
-  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
-/* Ícone de Check Ativo (Escondido no Início) */
+/* Ícone de Check - Simplificado para não travar */
 .skill-check-active {
-  margin-left: auto; /* Joga para a direita */
+  margin-left: auto;
   color: var(--primary);
   opacity: 0;
-  transform: scale(0.5);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: scale(0.8); /* Começa menor mas sem sumir total */
+  transition: opacity 0.2s ease, transform 0.2s ease-out;
 }
 
-/* --- ESTADO ATIVO (QUANDO A ANIMAÇÃO APARECE) --- */
-
-/* Quando o card ou li entra na tela pelo motion, mudamos o estilo */
-/* O Motion controla o opacity e x, mas usamos CSS para o glow técnico */
-
-.skill-item-premium:hover .skill-icon-status {
-  background: rgba(124, 58, 237, 0.15);
-  color: var(--primary);
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  filter: drop-shadow(0 0 10px var(--primary-glow));
+/* --- ESTADOS DE HOVER --- */
+.skill-item-premium:hover {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.2);
 }
 
 .skill-item-premium:hover .skill-name {
@@ -692,22 +610,11 @@ body.menu-open {
   transform: scale(1);
 }
 
-/* Brilho no ícone do título */
+/* Brilhos nos títulos */
 .icon-purple-glow {
   color: var(--primary);
-  filter: drop-shadow(0 0 8px var(--primary-glow));
-}
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 992px) {
-  .skills-grid-improved {
-    grid-template-columns: 1fr; /* Empilha no Mobile */
-    gap: 2rem;
-  }
-  
-  .skill-category-card-premium {
-    padding: 2rem;
-  }
+  /* Drop-shadow é mais leve que box-shadow complexo */
+  filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.5));
 }
 
 /* --- SEÇÃO SOBRE MIM (ESTRUTURA EM GRID) --- */
