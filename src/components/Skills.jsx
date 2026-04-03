@@ -24,18 +24,18 @@ const Skills = () => {
         { name: "Java (POO)", icon: <Cpu size={16} /> },
         { name: "SQL / MySQL", icon: <Database size={16} /> },
         { name: "Lógica de Programação", icon: <Terminal size={16} /> },
-        { name: "Noções de Spring", icon: <Box size={16} /> }
+        { name: "Integrações de API", icon: <Box size={16} /> }
       ]
     }
   ];
 
-  // Orquestração ultra-leve
+  // Orquestração de entrada ultra-leve (Performance Mode)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08 // Cascata mais rápida para não travar o scroll
+        staggerChildren: 0.08 // Cascata rápida para fluidez no scroll
       }
     }
   };
@@ -44,7 +44,7 @@ const Skills = () => {
     hidden: { 
       opacity: 0, 
       y: 20,
-      willChange: "transform, opacity" 
+      willChange: "transform, opacity" // Prepara a GPU
     },
     visible: {
       opacity: 1,
@@ -52,7 +52,7 @@ const Skills = () => {
       transition: { 
         duration: 0.4, 
         ease: "easeOut",
-        type: "tween" // Sai o spring pesado, entra o tween leve
+        type: "tween" // Mais leve que animações de física (spring)
       }
     }
   };
@@ -70,6 +70,7 @@ const Skills = () => {
     <section id="skills" className="section-skills">
       <div className="container">
         
+        {/* Título com Reveal Padrão */}
         <Reveal y={20}>
           <div className="section-header-skills">
             <h2 className="section-title">
@@ -79,19 +80,19 @@ const Skills = () => {
           </div>
         </Reveal>
         
+        {/* Grid de Skills com Efeito Cascata */}
         <motion.div 
           className="skills-grid-improved"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }} // Ativa um pouco antes de entrar na tela
+          viewport={{ once: true, margin: "-50px" }}
         >
           {categories.map((cat) => (
             <motion.div 
               key={cat.title}
               className={`skill-category-card-premium ${cat.type === 'client' ? 'glow-client' : 'glow-server'}`}
               variants={cardVariants}
-              // Simplificamos o hover para evitar recálculos de layout pesados
               whileHover={{ 
                 translateY: -5,
                 transition: { duration: 0.2, ease: "linear" } 
