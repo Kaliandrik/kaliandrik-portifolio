@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, Layout, Server, Settings2, Binary, Database, Box, CheckCircle2, Cpu } from 'lucide-react';
-import Reveal from './Reveal';
+import Reveal from './Reveal'; // Importando o padrão de scroll
 
 const Skills = () => {
   const categories = [
@@ -24,45 +24,39 @@ const Skills = () => {
         { name: "Java (POO)", icon: <Cpu size={16} /> },
         { name: "SQL / MySQL", icon: <Database size={16} /> },
         { name: "Lógica de Programação", icon: <Terminal size={16} /> },
-        { name: "Integrações de API", icon: <Box size={16} /> }
+        { name: "Integrações com APIs", icon: <Box size={16} /> }
       ]
     }
   ];
 
-  // Orquestração de entrada ultra-leve (Performance Mode)
+  // Orquestração ultra-leve
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08 // Cascata rápida para fluidez no scroll
+        delayChildren: 0.2,
+        staggerChildren: 0.15 
       }
     }
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20,
-      willChange: "transform, opacity" // Prepara a GPU
-    },
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { 
-        duration: 0.4, 
-        ease: "easeOut",
-        type: "tween" // Mais leve que animações de física (spring)
-      }
+      scale: 1,
+      transition: { type: "spring", stiffness: 100, damping: 15 }
     }
   };
 
   const skillItemVariants = {
-    hidden: { opacity: 0, x: -10 },
+    hidden: { opacity: 0, x: -15 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { type: "spring", stiffness: 120 }
     }
   };
 
@@ -70,7 +64,7 @@ const Skills = () => {
     <section id="skills" className="section-skills">
       <div className="container">
         
-        {/* Título com Reveal Padrão */}
+        {/* TÍTULO USANDO O REVEAL PADRÃO */}
         <Reveal y={20}>
           <div className="section-header-skills">
             <h2 className="section-title">
@@ -80,13 +74,13 @@ const Skills = () => {
           </div>
         </Reveal>
         
-        {/* Grid de Skills com Efeito Cascata */}
+        {/* GRID COM STAGGER (Efeito cascata) */}
         <motion.div 
           className="skills-grid-improved"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {categories.map((cat) => (
             <motion.div 
@@ -94,8 +88,9 @@ const Skills = () => {
               className={`skill-category-card-premium ${cat.type === 'client' ? 'glow-client' : 'glow-server'}`}
               variants={cardVariants}
               whileHover={{ 
+                scale: 1.02, 
                 translateY: -5,
-                transition: { duration: 0.2, ease: "linear" } 
+                transition: { duration: 0.2 } 
               }}
             >
               <div className="card-glass-effect-skills"></div>
