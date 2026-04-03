@@ -528,7 +528,6 @@ body.menu-open {
   padding: 100px 0;
   position: relative;
   overflow: hidden;
-  /* Garante que o navegador trate a seção como uma camada separada */
   contain: content; 
 }
 
@@ -543,38 +542,45 @@ body.menu-open {
 .skill-category-card-premium {
   position: relative;
   background: rgba(255, 255, 255, 0.02);
-  /* Blur suave apenas no PC por performance */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 28px;
   padding: 3rem;
   overflow: hidden;
-  /* Transições específicas para GPU */
   transition: transform 0.3s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   will-change: transform;
 }
 
-/* Desativa blur pesado no mobile para ficar liso */
 @media (max-width: 768px) {
   .skill-category-card-premium {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(15, 15, 15, 0.95); /* Fundo sólido e escuro */
+    background: rgba(15, 15, 15, 0.95);
   }
 }
 
-/* --- LISTA DE SKILLS --- */
+/* --- LISTA DE SKILLS (CORRIGIDO: ESPAÇAMENTO) --- */
+.skills-list-improved {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;             /* ESSENCIAL: Ativa o flex */
+  flex-direction: column;    /* Coloca um embaixo do outro */
+  gap: 1.2rem;               /* O ESPAÇO QUE ESTAVA FALTANDO */
+  position: relative;
+  z-index: 5;
+}
+
 .skill-item-premium {
   display: flex;
   align-items: center;
   gap: 15px;
   background: rgba(255, 255, 255, 0.02);
-  padding: 0.8rem 1.2rem; /* Reduzi um pouco para ficar mais elegante */
+  padding: 1rem 1.5rem;      /* Padding interno para o item não ficar esmagado */
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.04);
-  /* Transição de cor é leve */
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -586,12 +592,12 @@ body.menu-open {
   transition: color 0.2s ease;
 }
 
-/* Ícone de Check - Simplificado para não travar */
+/* Ícone de Check */
 .skill-check-active {
   margin-left: auto;
   color: var(--primary);
   opacity: 0;
-  transform: scale(0.8); /* Começa menor mas sem sumir total */
+  transform: scale(0.8);
   transition: opacity 0.2s ease, transform 0.2s ease-out;
 }
 
@@ -613,11 +619,10 @@ body.menu-open {
 /* Brilhos nos títulos */
 .icon-purple-glow {
   color: var(--primary);
-  /* Drop-shadow é mais leve que box-shadow complexo */
   filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.5));
 }
 
-/* --- SEÇÃO SOBRE MIM (ESTRUTURA EM GRID) --- */
+/* --- SEÇÃO SOBRE MIM --- */
 .section-about {
   padding: 100px 0;
   position: relative;
@@ -626,14 +631,12 @@ body.menu-open {
 
 .about-grid-improved {
   display: grid;
-  /* Define duas colunas: 1.2 partes para o texto, 0.8 partes para o terminal */
   grid-template-columns: 1.2fr 0.8fr; 
   gap: 4rem;
   align-items: center;
   width: 100%;
 }
 
-/* Badge de Destaque */
 .text-highlight-badge {
   display: inline-flex;
   align-items: center;
@@ -642,7 +645,7 @@ body.menu-open {
   border: 1px solid rgba(124, 58, 237, 0.2);
   padding: 8px 18px;
   border-radius: 100px;
-  color: #7c3aed; /* Cor primária roxa */
+  color: #7c3aed;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -669,7 +672,6 @@ body.menu-open {
   color: rgba(255, 255, 255, 0.5);
   font-size: 1rem;
 }
-
 /* --- ESTILIZAÇÃO DO TERMINAL --- */
 .about-terminal-container {
   position: relative;
