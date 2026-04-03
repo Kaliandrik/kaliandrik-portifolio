@@ -10,60 +10,98 @@ const Header = () => {
   return (
     <section id="home" className="section">
       <div className="container hero-grid">
-        
-        {/* --- COLUNA DA FOTO --- */}
-        {/* No Mobile, por ser a primeira Div no grid (ou com ajuste de order), ela aparece em cima */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+
+        {/* --- COLUNA DA FOTO (MOLDURA FIXA) --- */}
+        <motion.div
+          // Entrada suave vindo de baixo para cima
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="hero-image-container"
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
-          <img 
-            src="/kaliandrik.jpeg" 
-            alt="Kaliandrik Azevedo" 
-            className="profile-photo-circle" 
-          />
+          <div className="avatar-frame">
+            <video
+              src="/avatarpiscando.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="avatar-video"
+            >
+              Seu navegador não suporta vídeos.
+            </video>
+          </div>
         </motion.div>
 
         {/* --- COLUNA DO TEXTO --- */}
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="hero-text-container"
-        >
-          <span className="tag" style={{ marginBottom: '1rem', display: 'inline-block' }}>
+        <div className="hero-text-container">
+          {/* Tag de Status */}
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="tag" 
+            style={{ marginBottom: '1rem', display: 'inline-block' }}
+          >
             🚀 Disponível para Estágio
-          </span>
-<h1 className="home-title">
-  <span>Kaliandrik</span> 
-  {/* Envolvemos o nome no container fantasma */}
-  <div className="typewriter-container">
-    <span className="typewriter-text">Azevedo</span>
-  </div>
-</h1>
-          <p className="home-subtitle">
-            Desenvolvedor Full Stack em formação. Apaixonado por transformar lógica em interfaces incríveis.
-          </p>
-          
-          <div className="project-tags" style={{ marginBottom: '2rem' }}>
-            <span className="method" style={{ padding: '8px 15px', fontSize: '0.8rem' }}>
-              <Coffee size={14}/> Java
-            </span>
-            <span className="method" style={{ padding: '8px 15px', fontSize: '0.8rem' }}>
-              <Code2 size={14}/> React
-            </span>
-            <span className="method" style={{ padding: '8px 15px', fontSize: '0.8rem' }}>
-              <Globe size={14}/> SQL
-            </span>
-          </div>
+          </motion.span>
 
-          <button onClick={scrollToContact} className="cta-button primary">
+          {/* Título Principal */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="home-title"
+          >
+            <span>Kaliandrik</span>
+            <div className="typewriter-container">
+              <span className="typewriter-text">Azevedo</span>
+            </div>
+          </motion.h1>
+
+          {/* Subtítulo */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="home-subtitle"
+          >
+            Desenvolvedor Full Stack em formação. Apaixonado por transformar lógica em interfaces incríveis.
+          </motion.p>
+
+          {/* Tags de Linguagens (Entrada em cascata) */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="project-tags" 
+            style={{ marginBottom: '2rem' }}
+          >
+            <span className="method" style={{ padding: '8px 15px', fontSize: '0.8rem' }}>
+              <Coffee size={14} /> Java
+            </span>
+            <span className="method" style={{ padding: '8px 15px', fontSize: '0.8rem' }}>
+              <Code2 size={14} /> React
+            </span>
+            <span className="method" style={{ padding: '8px 15px', fontSize: '0.8rem' }}>
+              <Globe size={14} /> SQL
+            </span>
+          </motion.div>
+
+          {/* Botão de Ação */}
+          <motion.button 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.4, delay: 1 }}
+            onClick={scrollToContact} 
+            className="cta-button primary"
+          >
             Vamos conversar <ChevronRight size={18} />
-          </button>
-        </motion.div>
+          </motion.button>
+        </div>
 
       </div>
     </section>

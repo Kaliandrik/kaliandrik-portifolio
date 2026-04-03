@@ -17,17 +17,32 @@
 }
 
 body {
+  /* Mantemos o fundo base preto para segurança */
   background-color: var(--bg-dark);
   color: var(--text-main);
   overflow-x: hidden;
   line-height: 1.6;
+
+  /* Aplicamos o gradiente aqui de forma que ele não afete o layout */
+  background: linear-gradient(-45deg, #000000, #0a0a0a, #1a0b2e, #000000);
+  background-size: 400% 400%;
+  animation: smoothGradient 15s ease infinite;
 }
 
-/* --- ESTRUTURA GLOBAL --- */
+/* --- ANIMAÇÃO LIZA DO FUNDO --- */
+@keyframes smoothGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- ESTRUTURA GLOBAL (CENTRALIZAÇÃO PRESERVADA) --- */
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto; /* Isso garante o centralizado */
   padding: 0 2rem;
+  position: relative;
+  width: 100%; /* Força o container a respeitar a largura */
 }
 
 .section {
@@ -35,6 +50,7 @@ body {
   min-height: 80vh;
   display: flex;
   align-items: center;
+  justify-content: center; /* Garante centralização interna */
 }
 
 .section-title {
@@ -46,7 +62,7 @@ body {
   font-weight: 800;
 }
 
-/* --- ANIMAÇÕES DE FUNDO --- */
+/* --- ANIMAÇÕES DE FUNDO (BOLAS) --- */
 .background-balls {
   position: fixed;
   top: 0;
@@ -57,13 +73,14 @@ body {
   overflow: hidden;
   filter: blur(80px);
   opacity: 0.4;
+  pointer-events: none; /* Evita que as bolas bloqueiem cliques */
 }
 
 .ball {
   position: absolute;
   background: var(--primary);
   border-radius: 50%;
-  animation: float 20s infinite alternate;
+  animation: float 20s infinite alternate ease-in-out;
 }
 
 .ball-1 { width: 300px; height: 300px; top: -10%; left: -5%; }
@@ -281,39 +298,65 @@ body.menu-open {
   max-width: 500px;
 }
 
-.profile-photo-circle {
-  width: 250px;
-  height: 250px;
+/* --- MOLDURA DO AVATAR (O Círculo que não cresce) --- */
+.avatar-frame {
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
-  object-fit: cover; /* Mantém a proporção */
-  
-  /* --- O AJUSTE QUE VOCÊ PEDIU ESTÁ AQUI --- */
-  /* O primeiro valor é Horizontal (X), o segundo é Vertical (Y). */
-  /* 'center' centraliza na horizontal. */
-  /* '20%' (ou um valor menor que 50%) 'sobe' o foco da foto original dentro do círculo. */
-  /* Se '20%' for muito, tente '30%' ou '40%'. Se for pouco, tente '10%'. */
-  object-position: center 34%; 
-  /* ------------------------------------------- */
-
   border: 4px solid var(--primary);
   box-shadow: 0 0 40px var(--primary-glow);
-  transition: var(--transition);
-  display: block;
-  margin: 0 auto;
+  
+  /* CORTA TUDO QUE SAIR DO CÍRCULO */
+  overflow: hidden; 
+  
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  transition: border-color 0.3s ease;
 }
 
-.profile-photo-circle:hover {
-  transform: scale(1.03) rotate(3deg);
+/* --- O VÍDEO (Onde você mexe no ZOOM e POSIÇÃO) --- */
+.avatar-video {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  
+  /* POSIÇÃO VERTICAL: Aumente para descer o rosto, diminua para subir */
+  object-position: center 34%; 
+
+  /* ZOOM MANUAL: Mexa aqui para aumentar o rosto sem afetar a borda roxa */
+  /* 1.5 = 50% de zoom | 1.8 = 80% de zoom */
+  transform: scale(1.5); 
+  
+  transition: transform 0.4s ease;
+}
+
+/* Efeito ao passar o mouse */
+.avatar-frame:hover {
   border-color: #ffffff;
 }
 
+.avatar-frame:hover .avatar-video {
+  /* No hover, o rosto aproxima um tiquinho mais e gira leve */
+  transform: scale(1.6) rotate(3deg);
+}
+
+/* Ajuste Mobile */
 @media (max-width: 768px) {
-  .profile-photo-circle {
+  .avatar-frame {
     width: 200px;
     height: 200px;
     margin-top: 2rem;
   }
+  
+  .avatar-video {
+    /* Menos zoom no mobile para caber melhor */
+    transform: scale(1.3);
+  }
 }
+
 /* --- GRID DE PROJETOS --- */
 
 /* --- FEATURED PROJECT --- */
@@ -895,17 +938,18 @@ body.menu-open {
   text-decoration: none;
   font-size: 1rem;
   padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02); /* Mais sutil */
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(124, 58, 237, 0.1); /* Borda roxa fantasma */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .method:hover {
   border-color: var(--primary);
-  background: rgba(124, 58, 237, 0.08);
+  background: rgba(124, 58, 237, 0.1);
   transform: translateX(10px);
-  color: var(--primary);
+  color: #fff; /* Mantém o texto branco para leitura */
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
 }
 
 .method svg {
@@ -915,6 +959,77 @@ body.menu-open {
 
 .method:hover svg {
   transform: scale(1.2);
+  filter: drop-shadow(0 0 5px var(--primary)); /* Ícone brilha no hover */
+}
+
+/* --- FORMULÁRIO (ESTILO REFINADO) --- */
+.contact-simple-form .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-simple-form input, 
+.contact-simple-form textarea {
+  width: 100%;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: #fff;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.contact-simple-form input:focus, 
+.contact-simple-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(124, 58, 237, 0.05);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.1);
+}
+
+@media (max-width: 768px) {
+  .contact-main-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .contact-info-text h2 {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+}
+
+.contact-simple-form textarea {
+  resize: vertical; /* Impede o usuário de puxar para o lado e quebrar o layout */
+  min-height: 120px;
+  max-height: 300px; /* Limita o crescimento para baixo */
+}
+
+/* Container para segurar o input e o contador */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* O "efeitozinho" no canto */
+.char-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.65rem;
+  font-family: 'Courier New', Courier, monospace; /* Vibe terminal */
+  pointer-events: none; /* Garante que não atrapalhe o clique no input */
+  letter-spacing: 1px;
+  opacity: 0.6;
+  transition: color 0.3s ease;
+}
+
+/* Ajuste no padding do input para o texto não atropelar o contador */
+.contact-simple-form input, 
+.contact-simple-form textarea {
+  padding-right: 60px !important; 
 }
 
 /* --- RESPONSIVIDADE GERAL --- */
@@ -997,15 +1112,58 @@ body.menu-open {
 }
 
 .cta-button.primary {
-  background: var(--primary);
-  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(45deg, var(--primary), #a855f7); /* Gradiente roxo vivo */
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
 }
 
 .cta-button.primary:hover {
-  box-shadow: 0 0 20px var(--primary-glow);
-  transform: scale(1.02);
+  transform: translateY(-3px); /* Sobe de leve */
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5); /* Aumenta o brilho */
+  background: linear-gradient(45deg, #a855f7, var(--primary)); /* Inverte o gradiente */
 }
 
+.cta-button.primary:active {
+  transform: translateY(-1px);
+}
+
+/* Efeito de Reflexo (Glint) que passa pelo botão */
+.cta-button.primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+}
+
+.cta-button.primary:hover::after {
+  left: 120%;
+}
+
+/* Animação no Ícone de seta */
+.cta-button.primary svg {
+  transition: transform 0.3s ease;
+}
+
+.cta-button.primary:hover svg {
+  transform: translateX(5px); /* A seta "anda" para a direita */
+}
 /* --- FOOTER PREMIUM --- */
 .footer-premium {
   position: relative;
