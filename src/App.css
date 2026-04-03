@@ -523,7 +523,7 @@ body.menu-open {
   }
 }
 
-/* --- SEÇÃO SKILLS (OTIMIZADA) --- */
+/* --- SEÇÃO SKILLS --- */
 .section-skills {
   padding: 100px 0;
   position: relative;
@@ -531,10 +531,11 @@ body.menu-open {
   contain: content; 
 }
 
+/* GRID RESPONSIVO: No PC 2 colunas, no Tablet/Mobile 1 coluna */
 .skills-grid-improved {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
   width: 100%;
 }
 
@@ -553,24 +554,14 @@ body.menu-open {
   will-change: transform;
 }
 
-@media (max-width: 768px) {
-  .skill-category-card-premium {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: rgba(15, 15, 15, 0.95);
-  }
-}
-
-/* --- LISTA DE SKILLS (CORRIGIDO: ESPAÇAMENTO) --- */
+/* --- LISTA DE SKILLS (CORREÇÃO DO GRUDADO) --- */
 .skills-list-improved {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;             /* ESSENCIAL: Ativa o flex */
-  flex-direction: column;    /* Coloca um embaixo do outro */
-  gap: 1.2rem;               /* O ESPAÇO QUE ESTAVA FALTANDO */
-  position: relative;
-  z-index: 5;
+  display: flex;             /* Ativa o flexbox */
+  flex-direction: column;    /* Coloca itens em coluna */
+  gap: 1.2rem;               /* Espaçamento real entre as skills */
 }
 
 .skill-item-premium {
@@ -578,7 +569,7 @@ body.menu-open {
   align-items: center;
   gap: 15px;
   background: rgba(255, 255, 255, 0.02);
-  padding: 1rem 1.5rem;      /* Padding interno para o item não ficar esmagado */
+  padding: 1rem 1.2rem;      /* Aumentei o padding para dar mais respiro */
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.04);
   transition: background 0.2s ease, border-color 0.2s ease;
@@ -622,7 +613,31 @@ body.menu-open {
   filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.5));
 }
 
-/* --- SEÇÃO SOBRE MIM --- */
+/* --- RESPONSIVIDADE (MOBILE & TABLET) --- */
+@media (max-width: 992px) {
+  .skills-grid-improved {
+    grid-template-columns: 1fr; /* Força uma coluna em telas menores */
+    gap: 2rem;
+  }
+
+  .skill-category-card-premium {
+    padding: 2rem; /* Diminui o respiro interno no mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .section-skills {
+    padding: 60px 0;
+  }
+  
+  .skill-category-card-premium {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(15, 15, 15, 0.98); /* Fundo sólido para performance no celular */
+  }
+}
+
+/* --- SEÇÃO SOBRE MIM (ESTRUTURA EM GRID) --- */
 .section-about {
   padding: 100px 0;
   position: relative;
@@ -631,12 +646,14 @@ body.menu-open {
 
 .about-grid-improved {
   display: grid;
+  /* Define duas colunas: 1.2 partes para o texto, 0.8 partes para o terminal */
   grid-template-columns: 1.2fr 0.8fr; 
   gap: 4rem;
   align-items: center;
   width: 100%;
 }
 
+/* Badge de Destaque */
 .text-highlight-badge {
   display: inline-flex;
   align-items: center;
@@ -645,7 +662,7 @@ body.menu-open {
   border: 1px solid rgba(124, 58, 237, 0.2);
   padding: 8px 18px;
   border-radius: 100px;
-  color: #7c3aed;
+  color: #7c3aed; /* Cor primária roxa */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -672,6 +689,7 @@ body.menu-open {
   color: rgba(255, 255, 255, 0.5);
   font-size: 1rem;
 }
+
 /* --- ESTILIZAÇÃO DO TERMINAL --- */
 .about-terminal-container {
   position: relative;
