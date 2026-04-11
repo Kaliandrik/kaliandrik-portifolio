@@ -1305,3 +1305,64 @@ body.menu-open {
     margin: 1rem auto 2rem auto;
   }
 }
+
+/* --- SEÇÃO PROJETOS (COMPACTA) --- */
+.section-projects-compact {
+  padding: 60px 0 40px 0; /* Diminuído o padding superior e inferior */
+  position: relative;
+}
+
+/* --- LOGO AUMENTADA --- */
+.project-logo-large {
+  width: 280px; /* Aumentado de ~200px para 280px */
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.3));
+  object-fit: contain;
+}
+
+/* Ajuste para não cortar a logo no mobile */
+@media (max-width: 768px) {
+  .project-logo-large {
+    width: 200px;
+    margin-top: 2rem;
+  }
+}
+
+/* --- NAVEGAÇÃO COMPACTA --- */
+.projects-navigation-bottom-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem; /* Reduzido de 3rem para 1.5rem */
+}
+
+/* Garante que o contador e as setas fiquem proporcionais */
+.nav-arrow-btn {
+  width: 45px;
+  height: 45px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  color: #7c3aed;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-arrow-btn:hover {
+  background: #7c3aed;
+  color: #fff;
+}
+
+.project-counter {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.project-counter .current {
+  color: #fff;
+  font-size: 1.1rem;
+}
