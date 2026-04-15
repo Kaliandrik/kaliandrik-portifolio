@@ -1366,3 +1366,11 @@ body.menu-open {
   color: #fff;
   font-size: 1.1rem;
 }
+
+/* Estilo específico para logos com fundo claro (Wastech) */
+.project-logo-large.bg-light {
+  background-color: #ffffff;
+  padding: 15px; /* Espaço para o fundo branco aparecer em volta da logo */
+  border-radius: 20px; /* Bordas arredondadas para combinar com o card */
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); /* Um brilho leve branco em vez de roxo */
+}

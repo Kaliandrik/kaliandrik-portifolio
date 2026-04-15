@@ -10,7 +10,8 @@ import {
   Github,
   ChevronLeft,
   ChevronRight,
-  Car
+  Car,
+  CloudSun // Adicionei esse ícone para o Wastech
 } from 'lucide-react';
 import Reveal from './Reveal';
 
@@ -18,10 +19,24 @@ const Projects = () => {
   const allProjects = [
     {
       id: 1,
+      title: "Wastech",
+      badge: "Inovação Agro",
+      description: "Tecnologia inteligente para o campo: dados climáticos precisos para o agricultor.",
+      longDescription: "Utiliza a API OpenWeather para fornecer dados climáticos em tempo real, auxiliando agricultores na tomada de decisão sobre o que e como plantar de acordo com as condições do solo e clima.",
+      techs: ["React", "OpenWeather API", "CSS Modules", "JavaScript"],
+      features: ["Previsão em Tempo Real", "Dados Agrícolas", "Interface Intuitiva", "Consumo de API"],
+      link: "https://wastech-react.vercel.app/", 
+      repo: "https://github.com/Kaliandrik/wastech", // Ajuste se o repo for outro
+      logo: "/wastechlogo.jpeg",
+      icon: <CloudSun size={18} />,
+      isLight: true // Propriedade para controlar o fundo da logo
+    },
+    {
+      id: 2,
       title: "Carros Populares Brasil",
-      badge: "Novo Projeto",
+      badge: "UI/UX Design",
       description: "Um mergulho no mundo automotivo brasileiro focado em UI e interatividade.",
-      longDescription: "Desenvolvido para aperfeiçoar habilidades de CSS avançado, este projeto apresenta modelos icônicos como Onix, Celta e Corolla com uma interface moderna, fluida e totalmente responsiva.",
+      longDescription: "Desenvolvido para aperfeiçoar habilidades de CSS avançado, este projeto apresenta modelos icônicos como Onix, Celta e Corolla com uma interface moderna e fluida.",
       techs: ["React", "CSS3", "Framer Motion", "Responsive"],
       features: ["Animações Fluidas", "Design Moderno", "Mobile First", "Assets Otimizados"],
       link: "https://luxury-cars-liard.vercel.app/", 
@@ -30,11 +45,11 @@ const Projects = () => {
       icon: <Car size={18} />
     },
     {
-      id: 2,
+      id: 3,
       title: "Bolso Inteligente",
       badge: "Projeto Principal",
       description: "Decidi resolver meus gastos criando minha própria solução de controle financeiro!",
-      longDescription: "Uma solução completa utilizando Firebase para autenticação e banco de dados em tempo real, garantindo que seus dados estejam sempre seguros e acessíveis de qualquer lugar.",
+      longDescription: "Uma solução completa utilizando Firebase para autenticação e banco de dados em tempo real, garantindo que seus dados estejam sempre seguros e acessíveis.",
       techs: ["React", "TypeScript", "Firebase", "Tailwind CSS"],
       features: ["Integração Firebase", "Segurança (.env)", "Tailwind Responsive", "TypeScript Typed"],
       link: "https://bolso-inteligente-xi.vercel.app/",
@@ -109,7 +124,8 @@ const Projects = () => {
                <motion.img 
                  src={project.logo} 
                  alt={`Logo ${project.title}`} 
-                 className="project-logo-large"
+                 /* AQUI ESTÁ A MÁGICA: Adiciona a classe bg-light se isLight for true */
+                 className={`project-logo-large ${project.isLight ? 'bg-light' : ''}`}
                  animate={{ y: [-10, 10, -10] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                />
