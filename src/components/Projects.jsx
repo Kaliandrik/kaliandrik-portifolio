@@ -26,7 +26,7 @@ const Projects = () => {
       techs: ["React", "OpenWeather API", "CSS Modules", "JavaScript"],
       features: ["Previsão em Tempo Real", "Dados Agrícolas", "Interface Intuitiva", "Consumo de API"],
       link: "https://wastech-react.vercel.app/", 
-      repo: "https://github.com/Kaliandrik/wastech", // Ajuste se o repo for outro
+      repo: "https://github.com/Kaliandrik/wastech-react", 
       logo: "/wastechlogo.jpeg",
       icon: <CloudSun size={18} />,
       isLight: true // Propriedade para controlar o fundo da logo
