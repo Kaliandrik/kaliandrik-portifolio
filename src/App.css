@@ -1312,19 +1312,31 @@ body.menu-open {
   position: relative;
 }
 
-/* --- LOGO AUMENTADA --- */
-.project-logo-large {
-  width: 280px; /* Aumentado de ~200px para 280px */
-  height: auto;
-  filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.3));
-  object-fit: contain;
-}
-
-/* Ajuste para não cortar a logo no mobile */
+/* --- AJUSTE AGRESSIVO PARA MOBILE (SOMENTE WASTECH) --- */
 @media (max-width: 768px) {
+  
+  /* Ajuste para todas as logos no mobile */
   .project-logo-large {
-    width: 200px;
-    margin-top: 2rem;
+    width: 180px !important; /* Reduzi para 180px para garantir respiro */
+    max-width: 80% !important;
+    margin: 0 auto;
+  }
+
+  /* Ajuste específico para a Wastech no mobile */
+  .project-logo-large.bg-light {
+    width: 150px !important; /* Bem menor para compensar o fundo branco e o padding */
+    max-width: 70% !important; /* Força a ficar centralizada e pequena */
+    padding: 8px !important; /* Reduzi o padding para não "inflar" a imagem */
+    border-radius: 15px !important;
+  }
+
+  /* Garante que o container visual não tenha scroll lateral */
+  .project-visual {
+    width: 100%;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -1341,7 +1353,7 @@ body.menu-open {
 .nav-arrow-btn {
   width: 45px;
   height: 45px;
-  background: rgba(124, 58, 237, 0.08);
+  background: rgba(145, 116, 195, 0.08);
   border: 1px solid rgba(124, 58, 237, 0.2);
   color: #7c3aed;
   border-radius: 12px;

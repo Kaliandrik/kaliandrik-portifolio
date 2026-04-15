@@ -11,7 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Car,
-  CloudSun // Adicionei esse ícone para o Wastech
+  CloudSun 
 } from 'lucide-react';
 import Reveal from './Reveal';
 
@@ -29,7 +29,7 @@ const Projects = () => {
       repo: "https://github.com/Kaliandrik/wastech-react", 
       logo: "/wastechlogo.jpeg",
       icon: <CloudSun size={18} />,
-      isLight: true // Propriedade para controlar o fundo da logo
+      isLight: true 
     },
     {
       id: 2,
@@ -49,7 +49,7 @@ const Projects = () => {
       title: "Bolso Inteligente",
       badge: "Projeto Principal",
       description: "Decidi resolver meus gastos criando minha própria solução de controle financeiro!",
-      longDescription: "Uma solução completa utilizando Firebase para autenticação e banco de dados em tempo real, garantindo que seus dados estejam sempre seguros e acessíveis.",
+      longDescription: "Uma solução completa utilizando Firebase para autenticação e banco de dados em tempo real, garantindo que seus dados estejam sempre seguros e acessíveis de qualquer lugar.",
       techs: ["React", "TypeScript", "Firebase", "Tailwind CSS"],
       features: ["Integração Firebase", "Segurança (.env)", "Tailwind Responsive", "TypeScript Typed"],
       link: "https://bolso-inteligente-xi.vercel.app/",
@@ -120,11 +120,11 @@ const Projects = () => {
               </div>
             </div>
             
-            <div className="project-visual">
+            {/* O container visual agora recebe fundo branco se isLight for true */}
+            <div className={`project-visual ${project.isLight ? 'bg-light-container' : ''}`}>
                <motion.img 
                  src={project.logo} 
                  alt={`Logo ${project.title}`} 
-                 /* AQUI ESTÁ A MÁGICA: Adiciona a classe bg-light se isLight for true */
                  className={`project-logo-large ${project.isLight ? 'bg-light' : ''}`}
                  animate={{ y: [-10, 10, -10] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
