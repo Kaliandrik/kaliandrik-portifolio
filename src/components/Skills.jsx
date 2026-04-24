@@ -21,7 +21,7 @@ const Skills = () => {
       type: "server",
       icon: <Server className="icon-main icon-blue" />,
       skills: [
-        { name: "Java (POO)", icon: <Cpu size={16} /> },
+        { name: "TypeScript", icon: <Cpu size={16} /> },
         { name: "SQL / MySQL", icon: <Database size={16} /> },
         { name: "Lógica de Programação", icon: <Terminal size={16} /> },
         { name: "Integrações com APIs", icon: <Box size={16} /> }
