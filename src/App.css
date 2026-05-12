@@ -1,6 +1,6 @@
 /* --- RESET & VARIÁVEIS (ESSENCIAL) --- */
 :root {
-  --primary: #7c3aed; /* Roxo principal */
+  --primary: #7c3aed;
   --primary-glow: rgba(124, 58, 237, 0.5);
   --bg-dark: #0a0a0a;
   --bg-card: rgba(255, 255, 255, 0.03);
@@ -17,32 +17,28 @@
 }
 
 body {
-  /* Mantemos o fundo base preto para segurança */
   background-color: var(--bg-dark);
   color: var(--text-main);
   overflow-x: hidden;
   line-height: 1.6;
-
-  /* Aplicamos o gradiente aqui de forma que ele não afete o layout */
   background: linear-gradient(-45deg, #000000, #0a0a0a, #1a0b2e, #000000);
   background-size: 400% 400%;
   animation: smoothGradient 15s ease infinite;
 }
 
-/* --- ANIMAÇÃO LIZA DO FUNDO --- */
 @keyframes smoothGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* --- ESTRUTURA GLOBAL (CENTRALIZAÇÃO PRESERVADA) --- */
+/* --- ESTRUTURA GLOBAL --- */
 .container {
   max-width: 1200px;
-  margin: 0 auto; /* Isso garante o centralizado */
+  margin: 0 auto;
   padding: 0 2rem;
   position: relative;
-  width: 100%; /* Força o container a respeitar a largura */
+  width: 100%;
 }
 
 .section {
@@ -50,7 +46,7 @@ body {
   min-height: 80vh;
   display: flex;
   align-items: center;
-  justify-content: center; /* Garante centralização interna */
+  justify-content: center;
 }
 
 .section-title {
@@ -73,7 +69,7 @@ body {
   overflow: hidden;
   filter: blur(80px);
   opacity: 0.4;
-  pointer-events: none; /* Evita que as bolas bloqueiem cliques */
+  pointer-events: none;
 }
 
 .ball {
@@ -92,7 +88,6 @@ body {
 }
 
 /* --- NAVBAR --- */
-/* --- NAVBAR (VERSÃO PREMIUM) --- */
 .navbar {
   position: fixed;
   top: 0;
@@ -100,14 +95,12 @@ body {
   z-index: 1000;
   padding: 1.5rem 0;
   transition: var(--transition);
-  /* Estado inicial transparente */
-  background: transparent; 
+  background: transparent;
 }
 
-/* Efeito quando rola a página */
 .navbar-scrolled {
-  background: rgba(10, 10, 10, 0.7); /* Fundo escuro semi-transparente */
-  backdrop-filter: blur(12px); /* Efeito de vidro embaçado */
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 0.8rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -123,7 +116,6 @@ body {
   padding: 0 2rem;
 }
 
-/* --- ESTILIZAÇÃO DA LOGO --- */
 .logo-wrapper {
   display: flex;
   align-items: center;
@@ -135,15 +127,8 @@ body {
   user-select: none;
 }
 
-.logo-bracket {
-  color: var(--primary);
-  font-family: monospace;
-}
-
-.logo-text-main {
-  color: #fff;
-}
-
+.logo-bracket { color: var(--primary); font-family: monospace; }
+.logo-text-main { color: #fff; }
 .logo-text-sub {
   background: linear-gradient(to right, var(--primary), #a78bfa);
   -webkit-background-clip: text;
@@ -155,7 +140,6 @@ body {
   filter: drop-shadow(0 0 10px var(--primary-glow));
 }
 
-/* --- LINKS DESKTOP --- */
 .nav-links-desktop {
   display: flex;
   gap: 2.5rem;
@@ -183,17 +167,11 @@ body {
   transition: var(--transition);
 }
 
-.nav-link:hover {
-  color: #fff;
-}
+.nav-link:hover { color: #fff; }
+.nav-link:hover::after { width: 100%; }
 
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* --- MENU MOBILE --- */
 .mobile-menu-toggle {
-  display: none; /* Escondido no PC */
+  display: none;
   background: none;
   border: none;
   color: #fff;
@@ -201,42 +179,34 @@ body {
   padding: 5px;
 }
 
-/* --- MENU MOBILE CORRIGIDO --- */
 .nav-menu-mobile {
   position: fixed;
   top: 0;
-  right: 0; /* Fixa na direita */
+  right: 0;
   width: 100%;
   height: 100vh;
   background: rgba(10, 10, 10, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2.5rem;
-  
-  /* Estado Inicial: Escondido e invisível */
-  transform: translateX(100%); 
+  transform: translateX(100%);
   opacity: 0;
-  pointer-events: none; /* Impede clicar nos links enquanto escondido */
-  
+  pointer-events: none;
   transition: all 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
   z-index: 2000;
 }
 
 .nav-menu-mobile.active {
-  transform: translateX(0); /* Desliza para dentro */
+  transform: translateX(0);
   opacity: 1;
-  pointer-events: all; /* Ativa os cliques */
+  pointer-events: all;
 }
 
-/* Garante que o corpo da página não role quando o menu estiver aberto */
-body.menu-open {
-  overflow: hidden;
-}
+body.menu-open { overflow: hidden; }
 
 .mobile-link {
   font-size: 1.5rem;
@@ -247,50 +217,31 @@ body.menu-open {
   cursor: pointer;
 }
 
-/* --- RESPONSIVIDADE NAVBAR --- */
 @media (max-width: 850px) {
-  .nav-links-desktop {
-    display: none;
-  }
-
-  .mobile-menu-toggle {
-    display: block;
-  }
-  
-  .navbar {
-    padding: 1.2rem 0;
-  }
+  .nav-links-desktop { display: none; }
+  .mobile-menu-toggle { display: block; }
+  .navbar { padding: 1.2rem 0; }
 }
-/* --- HERO / HEADER --- */
+
+/* --- HERO --- */
 .hero-grid {
   display: grid;
-  /* No PC: Foto na esquerda (0.8fr) e Texto na direita (1.2fr) */
-  grid-template-columns: 0.8fr 1.2fr; 
+  grid-template-columns: 0.8fr 1.2fr;
   gap: 4rem;
   align-items: center;
 }
 
 @media (max-width: 768px) {
   .hero-grid {
-    /* No Mobile: Uma única coluna */
     grid-template-columns: 1fr;
     text-align: center;
     gap: 2rem;
   }
-
-  /* Garante que a imagem seja o primeiro item visualmente se o grid inverter */
-  .hero-image-container {
-    grid-row: 1; 
-  }
-  
-  .hero-text-container {
-    grid-row: 2;
-  }
-
-  .home-title {
-    font-size: 2.5rem;
-  }
+  .hero-image-container { grid-row: 1; }
+  .hero-text-container { grid-row: 2; }
+  .home-title { font-size: 2.5rem; }
 }
+
 .home-subtitle {
   font-size: 1.2rem;
   color: var(--text-dim);
@@ -298,17 +249,13 @@ body.menu-open {
   max-width: 500px;
 }
 
-/* --- MOLDURA DO AVATAR (O Círculo que não cresce) --- */
 .avatar-frame {
   width: 300px;
   height: 300px;
   border-radius: 50%;
   border: 4px solid var(--primary);
   box-shadow: 0 0 40px var(--primary-glow);
-  
-  /* CORTA TUDO QUE SAIR DO CÍRCULO */
-  overflow: hidden; 
-  
+  overflow: hidden;
   position: relative;
   display: flex;
   justify-content: center;
@@ -317,52 +264,32 @@ body.menu-open {
   transition: border-color 0.3s ease;
 }
 
-/* --- O VÍDEO (Onde você mexe no ZOOM e POSIÇÃO) --- */
 .avatar-video {
   width: 90%;
   height: 90%;
   object-fit: cover;
-  
-  /* POSIÇÃO VERTICAL: Aumente para descer o rosto, diminua para subir */
-  object-position: center 34%; 
-
-  /* ZOOM MANUAL: Mexa aqui para aumentar o rosto sem afetar a borda roxa */
-  /* 1.5 = 50% de zoom | 1.8 = 80% de zoom */
-  transform: scale(1.5); 
-  
+  object-position: center 34%;
+  transform: scale(1.5);
   transition: transform 0.4s ease;
 }
 
-/* Efeito ao passar o mouse */
-.avatar-frame:hover {
-  border-color: #ffffff;
-}
+.avatar-frame:hover { border-color: #ffffff; }
+.avatar-frame:hover .avatar-video { transform: scale(1.6) rotate(3deg); }
 
-.avatar-frame:hover .avatar-video {
-  /* No hover, o rosto aproxima um tiquinho mais e gira leve */
-  transform: scale(1.6) rotate(3deg);
-}
-
-/* Ajuste Mobile */
 @media (max-width: 768px) {
-  .avatar-frame {
-    width: 200px;
-    height: 200px;
-    margin-top: 2rem;
-  }
-  
-  .avatar-video {
-    /* Menos zoom no mobile para caber melhor */
-    transform: scale(1.3);
-  }
+  .avatar-frame { width: 200px; height: 200px; margin-top: 2rem; }
+  .avatar-video { transform: scale(1.3); }
 }
 
-/* --- GRID DE PROJETOS --- */
+/* --- SEÇÃO PROJETOS --- */
+.section-projects-compact {
+  padding: 60px 0 40px 0;
+  position: relative;
+}
 
-/* --- FEATURED PROJECT --- */
+/* --- FEATURED PROJECT CARD --- */
 .featured-project-card {
   display: grid;
-  /* Texto ocupa 1.4 e a Logo apenas 0.6 do espaço (Quadrado menor) */
   grid-template-columns: 1.4fr 0.6fr;
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -458,45 +385,65 @@ body.menu-open {
   width: 100%;
 }
 
-/* --- ESTILO DA LOGO (QUADRADO REDUZIDO E LOGO AMPLIADA) --- */
+/* --- VISUAL DA LOGO (CORRIGIDO) --- */
 .project-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px; /* Padding menor = Logo maior */
+  padding: 40px;
   background: #0d0d0d;
-  border-left: 1px solid rgba(255, 255, 255, 0.08); /* Borda na esquerda pois a logo está na direita */
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden; /* Impede a logo de vazar */
+  max-width: 100%;
 }
 
-.project-logo-display {
-  width: 220px; /* Logo maior */
+/* TAMANHO BASE DA LOGO — vale para desktop */
+.project-logo-large {
+  width: 150px;
   height: auto;
-  max-width: 95%; /* Garante que não bata nas bordas */
+  max-width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 0 25px rgba(124, 58, 237, 0.4));
   transition: transform 0.3s ease;
 }
 
-.featured-project-card:hover .project-logo-display {
+.featured-project-card:hover .project-logo-large {
   transform: scale(1.08);
 }
 
-/* --- RESPONSIVIDADE MOBILE --- */
+/* Wastech (logo com fundo claro) */
+.project-logo-large.bg-light {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  width: 120px;
+}
+
+/* --- RESPONSIVIDADE MOBILE DOS PROJETOS --- */
 @media (max-width: 768px) {
   .featured-project-card {
     grid-template-columns: 1fr;
   }
 
   .project-visual {
-    height: 180px;
+    height: 160px;
     padding: 30px;
-    order: -1; 
+    order: -1;
     border-left: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .project-logo-display {
-    width: 120px; /* Logo maior no mobile também */
+  .project-logo-large {
+    width: 85px !important;
+    max-width: 70% !important;
+  }
+
+  .project-logo-large.bg-light {
+    width: 70px !important;
+    max-width: 55% !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
   }
 
   .project-info {
@@ -505,22 +452,48 @@ body.menu-open {
     text-align: center;
   }
 
-  .project-info h3 {
-    font-size: 1.8rem;
-  }
+  .project-info h3 { font-size: 1.8rem; }
+  .project-features-grid { grid-template-columns: 1fr; text-align: left; }
+  .project-actions { flex-direction: column; }
+  .project-tags { justify-content: center; }
+}
 
-  .project-features-grid {
-    grid-template-columns: 1fr;
-    text-align: left;
-  }
+/* --- NAVEGAÇÃO DOS PROJETOS --- */
+.projects-navigation-bottom-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
 
-  .project-actions {
-    flex-direction: column;
-  }
+.nav-arrow-btn {
+  width: 45px;
+  height: 45px;
+  background: rgba(145, 116, 195, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  color: #7c3aed;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-  .project-tags {
-    justify-content: center;
-  }
+.nav-arrow-btn:hover {
+  background: #7c3aed;
+  color: #fff;
+}
+
+.project-counter {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.project-counter .current {
+  color: #fff;
+  font-size: 1.1rem;
 }
 
 /* --- SEÇÃO SKILLS --- */
@@ -528,10 +501,9 @@ body.menu-open {
   padding: 100px 0;
   position: relative;
   overflow: hidden;
-  contain: content; 
+  contain: content;
 }
 
-/* GRID RESPONSIVO: No PC 2 colunas, no Tablet/Mobile 1 coluna */
 .skills-grid-improved {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -539,7 +511,6 @@ body.menu-open {
   width: 100%;
 }
 
-/* --- CARDS PREMIUM --- */
 .skill-category-card-premium {
   position: relative;
   background: rgba(255, 255, 255, 0.02);
@@ -554,14 +525,13 @@ body.menu-open {
   will-change: transform;
 }
 
-/* --- LISTA DE SKILLS (CORREÇÃO DO GRUDADO) --- */
 .skills-list-improved {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;             /* Ativa o flexbox */
-  flex-direction: column;    /* Coloca itens em coluna */
-  gap: 1.2rem;               /* Espaçamento real entre as skills */
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .skill-item-premium {
@@ -569,13 +539,12 @@ body.menu-open {
   align-items: center;
   gap: 15px;
   background: rgba(255, 255, 255, 0.02);
-  padding: 1rem 1.2rem;      /* Aumentei o padding para dar mais respiro */
+  padding: 1rem 1.2rem;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.04);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-/* Nome da Skill */
 .skill-name {
   color: var(--text-dim);
   font-size: 0.95rem;
@@ -583,7 +552,6 @@ body.menu-open {
   transition: color 0.2s ease;
 }
 
-/* Ícone de Check */
 .skill-check-active {
   margin-left: auto;
   color: var(--primary);
@@ -592,52 +560,34 @@ body.menu-open {
   transition: opacity 0.2s ease, transform 0.2s ease-out;
 }
 
-/* --- ESTADOS DE HOVER --- */
 .skill-item-premium:hover {
   background: rgba(124, 58, 237, 0.08);
   border-color: rgba(124, 58, 237, 0.2);
 }
 
-.skill-item-premium:hover .skill-name {
-  color: #fff;
-}
+.skill-item-premium:hover .skill-name { color: #fff; }
+.skill-item-premium:hover .skill-check-active { opacity: 1; transform: scale(1); }
 
-.skill-item-premium:hover .skill-check-active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Brilhos nos títulos */
 .icon-purple-glow {
   color: var(--primary);
   filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.5));
 }
 
-/* --- RESPONSIVIDADE (MOBILE & TABLET) --- */
 @media (max-width: 992px) {
-  .skills-grid-improved {
-    grid-template-columns: 1fr; /* Força uma coluna em telas menores */
-    gap: 2rem;
-  }
-
-  .skill-category-card-premium {
-    padding: 2rem; /* Diminui o respiro interno no mobile */
-  }
+  .skills-grid-improved { grid-template-columns: 1fr; gap: 2rem; }
+  .skill-category-card-premium { padding: 2rem; }
 }
 
 @media (max-width: 768px) {
-  .section-skills {
-    padding: 60px 0;
-  }
-  
+  .section-skills { padding: 60px 0; }
   .skill-category-card-premium {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(15, 15, 15, 0.98); /* Fundo sólido para performance no celular */
+    background: rgba(15, 15, 15, 0.98);
   }
 }
 
-/* --- SEÇÃO SOBRE MIM (ESTRUTURA EM GRID) --- */
+/* --- SEÇÃO SOBRE MIM --- */
 .section-about {
   padding: 100px 0;
   position: relative;
@@ -646,14 +596,12 @@ body.menu-open {
 
 .about-grid-improved {
   display: grid;
-  /* Define duas colunas: 1.2 partes para o texto, 0.8 partes para o terminal */
-  grid-template-columns: 1.2fr 0.8fr; 
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 4rem;
   align-items: center;
   width: 100%;
 }
 
-/* Badge de Destaque */
 .text-highlight-badge {
   display: inline-flex;
   align-items: center;
@@ -662,7 +610,7 @@ body.menu-open {
   border: 1px solid rgba(124, 58, 237, 0.2);
   padding: 8px 18px;
   border-radius: 100px;
-  color: #7c3aed; /* Cor primária roxa */
+  color: #7c3aed;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -690,7 +638,7 @@ body.menu-open {
   font-size: 1rem;
 }
 
-/* --- ESTILIZAÇÃO DO TERMINAL --- */
+/* --- TERMINAL --- */
 .about-terminal-container {
   position: relative;
   width: 100%;
@@ -722,17 +670,8 @@ body.menu-open {
   gap: 15px;
 }
 
-.terminal-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.terminal-buttons span {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
+.terminal-buttons { display: flex; gap: 8px; }
+.terminal-buttons span { width: 12px; height: 12px; border-radius: 50%; }
 .btn-close { background: #ff5f57; }
 .btn-minimize { background: #febc2e; }
 .btn-maximize { background: #28c840; }
@@ -751,14 +690,12 @@ body.menu-open {
   color: #fff;
 }
 
-/* ANIMAÇÃO DE DIGITAÇÃO HACKER */
 .terminal-code-typing {
   display: inline-block;
   white-space: pre;
   overflow: hidden;
   vertical-align: top;
   width: 0;
-  /* Faz a animação de "escrever" */
   animation: typingTerminal 5s steps(120, end) infinite;
 }
 
@@ -768,7 +705,6 @@ body.menu-open {
   100% { width: 0; }
 }
 
-/* Cursor Piscando */
 .terminal-cursor-final {
   display: inline-block;
   width: 8px;
@@ -778,16 +714,12 @@ body.menu-open {
   animation: blinkCursor 0.8s step-end infinite;
 }
 
-@keyframes blinkCursor {
-  50% { opacity: 0; }
-}
+@keyframes blinkCursor { 50% { opacity: 0; } }
 
-/* Cores de Sintaxe (Syntax Highlighting) */
 .syntax-bracket { color: #facc15; }
 .syntax-key { color: #a78bfa; }
 .syntax-string { color: #28c840; }
 
-/* Brilho Roxo atrás do Terminal */
 .terminal-glow-background {
   position: absolute;
   top: 50%;
@@ -800,42 +732,19 @@ body.menu-open {
   pointer-events: none;
 }
 
-/* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 992px) {
-  .about-grid-improved {
-    /* No celular/tablet vira uma coluna só (um embaixo do outro) */
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 3rem;
-  }
-
-  .about-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .text-highlight-badge {
-    justify-content: center;
-  }
-
-  .about-subtitle {
-    font-size: 2rem;
-  }
-
-  .terminal-body {
-    font-size: 0.75rem;
-    padding: 15px;
-  }
+  .about-grid-improved { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+  .about-content { display: flex; flex-direction: column; align-items: center; }
+  .text-highlight-badge { justify-content: center; }
+  .about-subtitle { font-size: 2rem; }
+  .terminal-body { font-size: 0.75rem; padding: 15px; }
 }
 
 @media (max-width: 480px) {
-  .terminal-code-typing {
-    font-size: 0.7rem; /* Garante que o código não quebre linha no celular */
-  }
+  .terminal-code-typing { font-size: 0.7rem; }
 }
 
-/* --- SEÇÃO DE CONTATO --- */
+/* --- SEÇÃO CONTATO --- */
 .contact-main-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -865,9 +774,9 @@ body.menu-open {
   text-decoration: none;
   font-size: 1rem;
   padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.02); /* Mais sutil */
+  background: rgba(255, 255, 255, 0.02);
   border-radius: 16px;
-  border: 1px solid rgba(124, 58, 237, 0.1); /* Borda roxa fantasma */
+  border: 1px solid rgba(124, 58, 237, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -875,125 +784,13 @@ body.menu-open {
   border-color: var(--primary);
   background: rgba(124, 58, 237, 0.1);
   transform: translateX(10px);
-  color: #fff; /* Mantém o texto branco para leitura */
+  color: #fff;
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
 }
 
-.method svg {
-  color: var(--primary);
-  transition: transform 0.3s ease;
-}
+.method svg { color: var(--primary); transition: transform 0.3s ease; }
+.method:hover svg { transform: scale(1.2); filter: drop-shadow(0 0 5px var(--primary)); }
 
-.method:hover svg {
-  transform: scale(1.2);
-  filter: drop-shadow(0 0 5px var(--primary)); /* Ícone brilha no hover */
-}
-
-/* --- FORMULÁRIO (ESTILO REFINADO) --- */
-.contact-simple-form .input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.contact-simple-form input, 
-.contact-simple-form textarea {
-  width: 100%;
-  padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  color: #fff;
-  font-family: inherit;
-  transition: all 0.3s ease;
-}
-
-.contact-simple-form input:focus, 
-.contact-simple-form textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: rgba(124, 58, 237, 0.05);
-  box-shadow: 0 0 15px rgba(124, 58, 237, 0.1);
-}
-
-@media (max-width: 768px) {
-  .contact-main-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .contact-info-text h2 {
-    font-size: 2.2rem;
-    text-align: center;
-  }
-}
-
-.contact-simple-form textarea {
-  resize: vertical; /* Impede o usuário de puxar para o lado e quebrar o layout */
-  min-height: 120px;
-  max-height: 300px; /* Limita o crescimento para baixo */
-}
-
-/* Container para segurar o input e o contador */
-.input-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-/* O "efeitozinho" no canto */
-.char-counter {
-  position: absolute;
-  bottom: 8px;
-  right: 12px;
-  font-size: 0.65rem;
-  font-family: 'Courier New', Courier, monospace; /* Vibe terminal */
-  pointer-events: none; /* Garante que não atrapalhe o clique no input */
-  letter-spacing: 1px;
-  opacity: 0.6;
-  transition: color 0.3s ease;
-}
-
-/* Ajuste no padding do input para o texto não atropelar o contador */
-.contact-simple-form input, 
-.contact-simple-form textarea {
-  padding-right: 60px !important; 
-}
-
-/* --- RESPONSIVIDADE GERAL --- */
-@media (max-width: 992px) {
-  .about-grid, .contact-main-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
-  }
-  
-  .text-highlight-badge, .status-item {
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .about-subtitle, .contact-info-text h2 {
-    font-size: 2.2rem;
-  }
-
-  .info-card-premium, .method {
-    text-align: left;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-subtitle, .contact-info-text h2 {
-    font-size: 1.8rem;
-  }
-  
-  .info-card-premium {
-    padding: 1.2rem;
-    flex-direction: column;
-    text-align: center;
-  }
-}
-/* --- FORMULÁRIO SIMPLES (ESTILO) --- */
 .contact-simple-form {
   background: var(--bg-card);
   padding: 2.5rem;
@@ -1001,27 +798,82 @@ body.menu-open {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.contact-simple-form .input-group,
 .input-group {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-.input-group input, 
+.contact-simple-form input,
+.contact-simple-form textarea,
+.input-group input,
 .input-group textarea {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  color: white;
+  width: 100%;
+  padding: 1.2rem;
+  padding-right: 60px !important;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: #fff;
+  font-family: inherit;
+  transition: all 0.3s ease;
   outline: none;
-  transition: var(--transition);
 }
 
-.input-group input:focus, 
+.contact-simple-form input:focus,
+.contact-simple-form textarea:focus,
+.input-group input:focus,
 .input-group textarea:focus {
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(124, 58, 237, 0.05);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.1);
+}
+
+.contact-simple-form textarea {
+  resize: vertical;
+  min-height: 120px;
+  max-height: 300px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.char-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.65rem;
+  font-family: 'Courier New', Courier, monospace;
+  pointer-events: none;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  transition: color 0.3s ease;
+}
+
+@media (max-width: 850px) {
+  .contact-main-grid { grid-template-columns: 1fr; text-align: center; }
+  .contact-info-text h2 { font-size: 2rem; }
+  .method { justify-content: center; }
+}
+
+@media (max-width: 768px) {
+  .contact-main-grid { gap: 3rem; }
+  .contact-info-text h2 { font-size: 2.2rem; text-align: center; }
+}
+
+@media (max-width: 992px) {
+  .about-grid, .contact-main-grid { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+  .text-highlight-badge, .status-item { justify-content: center; margin-left: auto; margin-right: auto; }
+  .about-subtitle, .contact-info-text h2 { font-size: 2.2rem; }
+  .info-card-premium, .method { text-align: left; }
+}
+
+@media (max-width: 480px) {
+  .about-subtitle, .contact-info-text h2 { font-size: 1.8rem; }
+  .info-card-premium { padding: 1.2rem; flex-direction: column; text-align: center; }
 }
 
 /* --- BOTÕES --- */
@@ -1046,7 +898,7 @@ body.menu-open {
   font-size: 1.1rem;
   font-weight: 700;
   color: #ffffff;
-  background: linear-gradient(45deg, var(--primary), #a855f7); /* Gradiente roxo vivo */
+  background: linear-gradient(45deg, var(--primary), #a855f7);
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -1057,16 +909,13 @@ body.menu-open {
 }
 
 .cta-button.primary:hover {
-  transform: translateY(-3px); /* Sobe de leve */
-  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5); /* Aumenta o brilho */
-  background: linear-gradient(45deg, #a855f7, var(--primary)); /* Inverte o gradiente */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+  background: linear-gradient(45deg, #a855f7, var(--primary));
 }
 
-.cta-button.primary:active {
-  transform: translateY(-1px);
-}
+.cta-button.primary:active { transform: translateY(-1px); }
 
-/* Efeito de Reflexo (Glint) que passa pelo botão */
 .cta-button.primary::after {
   content: '';
   position: absolute;
@@ -1079,19 +928,11 @@ body.menu-open {
   transition: all 0.6s ease;
 }
 
-.cta-button.primary:hover::after {
-  left: 120%;
-}
+.cta-button.primary:hover::after { left: 120%; }
+.cta-button.primary svg { transition: transform 0.3s ease; }
+.cta-button.primary:hover svg { transform: translateX(5px); }
 
-/* Animação no Ícone de seta */
-.cta-button.primary svg {
-  transition: transform 0.3s ease;
-}
-
-.cta-button.primary:hover svg {
-  transform: translateX(5px); /* A seta "anda" para a direita */
-}
-/* --- FOOTER PREMIUM --- */
+/* --- FOOTER --- */
 .footer-premium {
   position: relative;
   padding: 50px 0;
@@ -1108,17 +949,8 @@ body.menu-open {
   gap: 20px;
 }
 
-.footer-left, .footer-right {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.footer-copyright {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
-}
+.footer-left, .footer-right { display: flex; flex-direction: column; gap: 8px; }
+.footer-copyright { font-size: 1.1rem; font-weight: 600; color: #fff; }
 
 .footer-location {
   display: flex;
@@ -1137,16 +969,9 @@ body.menu-open {
   font-size: 0.9rem;
 }
 
-.footer-stack strong {
-  color: #fff;
-  font-weight: 600;
-}
+.footer-stack strong { color: #fff; font-weight: 600; }
 
-.heart-icon {
-  color: #ff4b4b;
-  fill: #ff4b4b;
-  animation: pulse 2s infinite;
-}
+.heart-icon { color: #ff4b4b; fill: #ff4b4b; animation: pulse 2s infinite; }
 
 .footer-glow-line {
   position: absolute;
@@ -1165,38 +990,13 @@ body.menu-open {
   100% { transform: scale(1); }
 }
 
-/* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .footer-left, .footer-right {
-    align-items: center;
-  }
-  
-  .footer-stack {
-    font-size: 0.8rem;
-  }
+  .footer-content { flex-direction: column; text-align: center; }
+  .footer-left, .footer-right { align-items: center; }
+  .footer-stack { font-size: 0.8rem; }
 }
 
-/* --- RESPONSIVIDADE FINAL --- */
-@media (max-width: 850px) {
-  .contact-main-grid {
-    grid-template-columns: 1fr; /* Um em cima do outro no Mobile */
-    text-align: center;
-  }
-
-  .contact-info-text h2 {
-    font-size: 2rem;
-  }
-
-  .method {
-    justify-content: center;
-  }
-}
-
+/* --- PARTÍCULAS --- */
 .particles-container {
   position: fixed;
   top: 0;
@@ -1206,45 +1006,42 @@ body.menu-open {
   z-index: -1;
   pointer-events: none;
 }
+
 .particle {
   position: absolute;
   background: white;
   border-radius: 50%;
   opacity: 0.2;
 }
+
 @keyframes particleFloatSoft {
   0% { transform: translateY(0); opacity: 0; }
   50% { opacity: 0.2; }
   100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* --- EFEITO MÁQUINA DE ESCREVER --- */
-/* --- TYPEWRITER & HERO TITLE --- */
-
-/* O Título Principal */
+/* --- TYPEWRITER --- */
 .home-title {
   font-size: 3.5rem;
   font-weight: 800;
   line-height: 1.2;
   color: #fff;
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   align-items: center;
   gap: 15px;
   transition: all 0.3s ease;
 }
 
-/* O Container que "segura" o espaço do nome para não pular o site */
 .typewriter-container {
   display: inline-flex;
-  min-width: 250px; 
+  min-width: 250px;
   min-height: 1.2em;
   align-items: center;
   vertical-align: bottom;
   overflow: visible;
 }
 
-/* O texto que efetivamente digita */
 .typewriter-text {
   color: var(--primary);
   display: inline-block;
@@ -1253,18 +1050,16 @@ body.menu-open {
   white-space: nowrap;
   border-right: 3px solid var(--primary);
   width: 0;
-  animation: 
+  animation:
     typing 3.5s steps(20, end) infinite,
     blink-caret 0.75s step-end infinite;
 }
 
-/* --- ANIMAÇÕES --- */
-
 @keyframes typing {
   0% { width: 0; }
-  50% { width: 100%; }   /* Termina de digitar no meio do ciclo */
-  90% { width: 100%; }   /* Fica parado lendo o nome */
-  100% { width: 0; }     /* Reseta rápido */
+  50% { width: 100%; }
+  90% { width: 100%; }
+  100% { width: 0; }
 }
 
 @keyframes blink-caret {
@@ -1272,28 +1067,23 @@ body.menu-open {
   50% { border-color: var(--primary); }
 }
 
-/* --- AJUSTES PARA MOBILE (CENTRALIZAÇÃO) --- */
-
 @media (max-width: 768px) {
   .home-title {
-    flex-direction: column; /* Nome em cima, sobrenome embaixo */
-    align-items: center;    /* Centraliza os blocos de texto */
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     font-size: 2.8rem;
-    gap: 5px;               /* Diminui o espaço entre nome e sobrenome */
+    gap: 5px;
   }
 
   .typewriter-container {
-    min-width: 100%;        /* Ocupa a largura toda para alinhar ao centro */
-    justify-content: center;/* Centraliza o texto digitando */
+    min-width: 100%;
+    justify-content: center;
     margin-top: 5px;
   }
 
-  .typewriter-text {
-    border-right-width: 2px; /* Cursor um pouco mais fino no celular */
-  }
+  .typewriter-text { border-right-width: 2px; }
 
-  /* Centraliza também o subtítulo e o botão no mobile */
   .hero-text-container {
     display: flex;
     flex-direction: column;
@@ -1301,88 +1091,5 @@ body.menu-open {
     text-align: center;
   }
 
-  .home-subtitle {
-    margin: 1rem auto 2rem auto;
-  }
-}
-
-/* --- SEÇÃO PROJETOS (COMPACTA) --- */
-.section-projects-compact {
-  padding: 60px 0 40px 0; /* Diminuído o padding superior e inferior */
-  position: relative;
-}
-
-/* --- AJUSTE AGRESSIVO PARA MOBILE (SOMENTE WASTECH) --- */
-@media (max-width: 768px) {
-  
-  /* Ajuste para todas as logos no mobile */
-  .project-logo-large {
-    width: 180px !important; /* Reduzi para 180px para garantir respiro */
-    max-width: 80% !important;
-    margin: 0 auto;
-  }
-
-  /* Ajuste específico para a Wastech no mobile */
-  .project-logo-large.bg-light {
-    width: 150px !important; /* Bem menor para compensar o fundo branco e o padding */
-    max-width: 70% !important; /* Força a ficar centralizada e pequena */
-    padding: 8px !important; /* Reduzi o padding para não "inflar" a imagem */
-    border-radius: 15px !important;
-  }
-
-  /* Garante que o container visual não tenha scroll lateral */
-  .project-visual {
-    width: 100%;
-    overflow: hidden; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-/* --- NAVEGAÇÃO COMPACTA --- */
-.projects-navigation-bottom-compact {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1.5rem; /* Reduzido de 3rem para 1.5rem */
-}
-
-/* Garante que o contador e as setas fiquem proporcionais */
-.nav-arrow-btn {
-  width: 45px;
-  height: 45px;
-  background: rgba(145, 116, 195, 0.08);
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  color: #7c3aed;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.nav-arrow-btn:hover {
-  background: #7c3aed;
-  color: #fff;
-}
-
-.project-counter {
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.project-counter .current {
-  color: #fff;
-  font-size: 1.1rem;
-}
-
-/* Estilo específico para logos com fundo claro (Wastech) */
-.project-logo-large.bg-light {
-  background-color: #ffffff;
-  padding: 15px; /* Espaço para o fundo branco aparecer em volta da logo */
-  border-radius: 20px; /* Bordas arredondadas para combinar com o card */
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); /* Um brilho leve branco em vez de roxo */
+  .home-subtitle { margin: 1rem auto 2rem auto; }
 }
